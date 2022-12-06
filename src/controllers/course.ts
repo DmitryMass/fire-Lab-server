@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import Course from '../models/Course';
+import Course, { ICourse } from '../models/Course';
 
 export const getCourses: RequestHandler = async (req, res) => {
     try {
@@ -31,7 +31,7 @@ export const getCurrentCourse: RequestHandler = async (req, res) => {
 export const createCourse: RequestHandler = async (req, res) => {
     try {
         const body = req.body;
-        const course = new Course({
+        const course = new Course<ICourse>({
             ...body,
         });
 

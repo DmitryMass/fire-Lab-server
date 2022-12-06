@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
 
-const Course = new mongoose.Schema(
+export interface ICourse {
+    title: string;
+    checked: boolean;
+    description: string;
+    videoLink: string;
+}
+
+const Course = new mongoose.Schema<ICourse>(
     {
         title: {
             type: String,
