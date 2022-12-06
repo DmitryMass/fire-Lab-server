@@ -41,3 +41,24 @@ export const createCourse: RequestHandler = async (req, res) => {
         return res.status(404).send({ message: 'Курс не створено' });
     }
 };
+
+export const updateCourse: RequestHandler = async (req, res) => {
+    try {
+        const {
+            params: { id },
+        } = req;
+        const course = await Course.findOne({ _id: id });
+        console.log(id, course);
+
+        await course?.updateOne({
+            course,
+            checked: !course.checked,
+        });
+
+        await course?.save();
+
+        return res.status(200).send({ message: 'Ok' });
+    } catch (e) {
+        return res.status(401).send({ message: 'Не вдалося обновити' });
+    }
+};
